@@ -14,7 +14,7 @@ class GuestsController < ApplicationController
     end
 
     def create
-        guest = Guest.new(wedding_id: params[:wedding_id], guest_full_name: params[:guest_full_name], guest_attending: params[:guest_attending], guest_message: params[guest_message])
+        guest = Guest.new(wedding_id: Wedding.all[0].id, guest_email: params[:guest_email], guest_full_name: params[:guest_full_name], guest_attending: params[:guest_attending], guest_message: params[:guest_message])
         if guest.save
           render json: guest
         else

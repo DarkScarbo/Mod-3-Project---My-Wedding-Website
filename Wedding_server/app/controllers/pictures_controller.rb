@@ -13,6 +13,23 @@ class PicturesController < ApplicationController
         end
     end
 
-    
+    def update
+      picture = Picture.find(params[:id])
+      if picture.update(picture_params)
+        render json: picture
+      end
+    end
 
+    def destroy
+          picture = Picture.find(params[:id])
+          picture.destroy
+          render json: picture
+    end
+    
+    private
+    def picture_params
+      params.require(:picture).permit(:img_title, :img_likes, :img_description, :img_url)
+    end
+
+    
 end

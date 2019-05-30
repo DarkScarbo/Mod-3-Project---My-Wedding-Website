@@ -1448,6 +1448,7 @@ p {
   margin: 0 !important;
   line-height: 0;
   width: 25%;
+  height: 320px;
   padding: 0;
   position: relative;
 }

@@ -33,6 +33,31 @@ function renderPic(pic) {
           </div>
       </figcaption>`;
 
+  // if (figure.id == "pic_1")
+  //   figure.styleName =
+  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
+  // else if (figure.id == "pic_2")
+  //   figure.styleName =
+  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
+  // else if (figure.id == "pic_3")
+  //   figure.styleName =
+  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
+  // else if (figure.id == "pic_4")
+  //   figure.styleName =
+  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
+  // else if (figure.id == "pic_5")
+  //   figure.styleName =
+  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
+  // else if (figure.id == "pic_6")
+  //   figure.styleName =
+  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
+  // else if (figure.id == "pic_7")
+  //   figure.styleName =
+  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
+  // else if (figure.id == "pic_8")
+  //   figure.styleName =
+  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
+
   portafolio.append(figure);
 
   const like_button = figure.querySelector("#like_button");

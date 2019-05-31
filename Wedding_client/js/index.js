@@ -21,14 +21,21 @@ const hostHobbies = document.querySelectorAll(".host_hobbies");
 const hostsPhones = document.querySelector("#phones");
 const hostsEmails = document.querySelector("#emails");
 
-const weddingNames = document.querySelector(".names");
+const weddingNames = document.querySelector("#names");
 const weddingDateLocation = document.querySelector("#date_location");
 const weddingAboutUs = document.querySelector("#about_us");
 const weddingHostsAdress = document.querySelector("#address");
 
 //Wedding//
 
+function renderWeddingInformation(weddingInformation) {
+  weddingNames.innerHTML = `We’re getting married!<br> <strong id="names">${weddingInformation.hosts_names}</strong>`
+  weddingAboutUs.innerText = weddingInformation.about_us
+  weddingDateLocation.innerText = weddingInformation.date_location
+  const [lineOne, lineTwo, lineThree] = weddingInformation.hosts_address.split(". ")
 
+  weddingHostsAdress.innerHTML = `${lineOne}</br>${lineTwo}</br>${lineThree}`
+}
 
 //Hosts//
 function renderHobbie(hobbie, hostHobbies) {
@@ -102,7 +109,7 @@ function renderPics(pics) {
 function init() {
   getPics().then(pics => renderPics(pics));
   getHosts().then(hosts => renderHosts(hosts));
-  getWeedingInformation(weddingInformation => renderWeddingInformation(weddingInformation))
+  getWeedingInformation().then(weddingInformation => renderWeddingInformation(weddingInformation))
 }
 
 init();

@@ -48,3 +48,9 @@ function createGuestBackEnd(e) {
 function getHosts() {
   return fetch(HOSTS_URL).then(resp => resp.json());
 }
+
+//Weeding//
+
+function getWeedingInformation() {
+  return fetch(WEDDING_URL).then(resp => resp.json());
+}

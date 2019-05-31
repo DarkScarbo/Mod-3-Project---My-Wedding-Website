@@ -5,38 +5,52 @@ const EVENTS_URL = "http://localhost:3000/events";
 const WEDDING_URL = "http://localhost:3000/weddings/1";
 
 const portafolio = document.querySelector("#portfolio_wrapper");
+
 const formGuest = document.querySelector("#formGuest");
-const personOneName = document.querySelector("#person_one_name");
-const personOneHobbies = document.querySelector("#person_one_hobbies");
-const personOneImage = document.querySelector("#person_one_image");
-const personOneDetails = document.querySelector("#person_one_details");
-const personTwoName = document.querySelector("#person_two_name");
-const personTwoImage = document.querySelector("#person_two_image");
-const personTwoDetails = document.querySelector("#person_two_details");
-const personHobbies = document.querySelectorAll(".person_hobbies");
+
+const hostOneName = document.querySelector("#host_one_name");
+const hostOneHobbies = document.querySelector("#host_one_hobbies");
+const hostOneImage = document.querySelector("#host_one_image");
+const hostOneDetails = document.querySelector("#host_one_details");
+const hostOnePhone = document.querySelector("#phone_one");
+const hostOneEmail = document.querySelector("#email_one");
+const hostTwoName = document.querySelector("#host_two_name");
+const hostTwoImage = document.querySelector("#host_two_image");
+const hostTwoDetails = document.querySelector("#host_two_details");
+const hostHobbies = document.querySelectorAll(".host_hobbies");
+const hostsPhones = document.querySelector("#phones");
+const hostsEmails = document.querySelector("#emails");
+
+const weddingNames = document.querySelector(".names");
+const weddingDateLocation = document.querySelector("#date_location");
+const weddingAboutUs = document.querySelector("#about_us");
+const weddingHostsAdress = document.querySelector("#address");
+
+//Wedding//
+
+
 
 //Hosts//
-function renderHobbie(hobbie, personHobbies) {
+function renderHobbie(hobbie, hostHobbies) {
   const hobbie_li = document.createElement("li");
   hobbie_li.className = "points";
   hobbie_li.innerText = hobbie;
-  personHobbies.appendChild(hobbie_li);
+  hostHobbies.appendChild(hobbie_li);
 }
 
 function renderHosts(hosts) {
-  personOneName.innerText = hosts[0].host_name;
-  personOneImage.src = hosts[0].host_img_url;
-  personOneDetails.innerHTML = hosts[0].host_details;
-  hosts[0].host_hobbies
-    .split(". ")
-    .forEach(hobbie => renderHobbie(hobbie, personHobbies[0]));
+  hostOneName.innerText = hosts[0].host_name;
+  hostOneImage.src = hosts[0].host_img_url;
+  hostOneDetails.innerHTML = hosts[0].host_details;
+  hosts[0].host_hobbies.split(". ").forEach(hobbie => renderHobbie(hobbie, hostHobbies[0]));
+  
+  hostTwoName.innerText = hosts[1].host_name;
+  hostTwoImage.src = hosts[1].host_img_url;
+  hostTwoDetails.innerHTML = hosts[1].host_details;
+  hosts[1].host_hobbies.split(". ").forEach(hobbie => renderHobbie(hobbie, hostHobbies[1]));
 
-  personTwoName.innerText = hosts[1].host_name;
-  personTwoImage.src = hosts[1].host_img_url;
-  personTwoDetails.innerHTML = hosts[1].host_details;
-  hosts[1].host_hobbies
-    .split(". ")
-    .forEach(hobbie => renderHobbie(hobbie, personHobbies[1]));
+  hostsPhones.innerHTML = `${hosts[0].host_phone_number}<br>${hosts[1].host_phone_number}`
+  hostsEmails.innerHTML = `${hosts[0].host_email}<br>${hosts[1].host_email}`
 }
 
 //Guests//
@@ -88,6 +102,7 @@ function renderPics(pics) {
 function init() {
   getPics().then(pics => renderPics(pics));
   getHosts().then(hosts => renderHosts(hosts));
+  getWeedingInformation(weddingInformation => renderWeddingInformation(weddingInformation))
 }
 
 init();

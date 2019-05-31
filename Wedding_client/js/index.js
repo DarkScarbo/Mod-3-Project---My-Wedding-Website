@@ -92,8 +92,25 @@ function renderHosts(hosts) {
 //Guests//
 
 guestForm.addEventListener("submit", e => {
+  const formFullName = document.querySelector("#formFullName");
+  const formEmail = document.querySelector("#formEmail");
+  const formAnswer = document.querySelector("#formAnswer");
+  const formMessage = document.querySelector("#formMessage");
+
+  newGuestName = formFullName.value;
+  newGuestEmail = formEmail.value;
+  newGuestMessage = formMessage.value;
+  newGuestAnswer = formAnswer.value;
+
+  const newGuest = {
+    guest_full_name: newGuestName,
+    guest_attending: newGuestAnswer,
+    guest_message: newGuestMessage,
+    guest_email: newGuestEmail
+  }
+
   e.preventDefault();
-  createGuestBackEnd(e);
+  createGuestBackEnd(e, newGuest);
 });
 
 //Pics//

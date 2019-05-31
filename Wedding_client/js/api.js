@@ -18,28 +18,13 @@ function getHosts() {
 
 //Guest//
 
-function createGuestBackEnd(e) {
-  const formFullName = document.querySelector("#formFullName");
-  const formEmail = document.querySelector("#formEmail");
-  const formAnswer = document.querySelector("#formAnswer");
-  const formMessage = document.querySelector("#formMessage");
-
-  newGuestName = formFullName.value;
-  newGuestEmail = formEmail.value;
-  newGuestMessage = formMessage.value;
-  newGuestAnswer = formAnswer.value;
-
+function createGuestBackEnd(e, newGuest) {
   return fetch(GUESTS_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      guest_full_name: newGuestName,
-      guest_attending: newGuestAnswer,
-      guest_message: newGuestMessage,
-      guest_email: newGuestEmail
-    })
+    body: JSON.stringify(newGuest)
   })
     .then(resp => resp.json())
     .then(e.target.reset());

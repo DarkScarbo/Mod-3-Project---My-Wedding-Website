@@ -1,12 +1,15 @@
+//URL consts//
+
 const PICTURES_URL = "http://localhost:3000/pictures";
 const GUESTS_URL = "http://localhost:3000/guests";
 const HOSTS_URL = "http://localhost:3000/hosts";
-const EVENTS_URL = "http://localhost:3000/events";
 const WEDDING_URL = "http://localhost:3000/weddings/1";
+const EVENTS_URL = "http://localhost:3000/events";
 
-const portafolio = document.querySelector("#portfolio_wrapper");
+//Dom consts//
+const pictures = document.querySelector("#portfolio_wrapper");
 
-const formGuest = document.querySelector("#formGuest");
+const guestForm = document.querySelector("#guest_form");
 
 const hostOneName = document.querySelector("#host_one_name");
 const hostOneHobbies = document.querySelector("#host_one_hobbies");
@@ -26,23 +29,49 @@ const weddingDateLocation = document.querySelector("#date_location");
 const weddingAboutUs = document.querySelector("#about_us");
 const weddingHostsAdress = document.querySelector("#address");
 
+const events = document.querySelector("#events");
+
+//Events//
+
+function renderEvent(event) {
+  const eventDiv = document.createElement("li");
+  eventDiv.className = "col-md-3"
+
+  const [descriptionLineOne, descriptionLineTwo, descriptionLineThree] = event.event_description.split("? ")
+
+  eventDiv.innerHTML = `
+  <div class="service_icon delay-03s animated wow  zoomIn"> <span><i class="fa fa-${event.event_icon}"></i></span> </div>
+          <div class="service_block">
+            
+            <h3 class="animated fadeInUp wow">${event.event_title}</h3>
+<p class="animated fadeInDown wow">${descriptionLineOne}<a href=${event.event_link_url} target="_blank">${descriptionLineTwo}  </a>${descriptionLineThree}</p>
+          </div>`
+
+  events.append(eventDiv)
+}
+
+function renderEvents(events) {
+  events.forEach(event => renderEvent(event));
+}
+
 //Wedding//
 
 function renderWeddingInformation(weddingInformation) {
   weddingNames.innerHTML = `We’re getting married!<br> <strong id="names">${weddingInformation.hosts_names}</strong>`
   weddingAboutUs.innerText = weddingInformation.about_us
   weddingDateLocation.innerText = weddingInformation.date_location
-  const [lineOne, lineTwo, lineThree] = weddingInformation.hosts_address.split(". ")
 
-  weddingHostsAdress.innerHTML = `${lineOne}</br>${lineTwo}</br>${lineThree}`
+  const [addressLineOne, addressLineTwo, addressLineThree] = weddingInformation.hosts_address.split(". ")
+
+  weddingHostsAdress.innerHTML = `${addressLineOne}</br>${addressLineTwo}</br>${addressLineThree}`
 }
 
 //Hosts//
 function renderHobbie(hobbie, hostHobbies) {
-  const hobbie_li = document.createElement("li");
-  hobbie_li.className = "points";
-  hobbie_li.innerText = hobbie;
-  hostHobbies.appendChild(hobbie_li);
+  const hobbieLi = document.createElement("li");
+  hobbieLi.className = "points";
+  hobbieLi.innerText = hobbie;
+  hostHobbies.appendChild(hobbieLi);
 }
 
 function renderHosts(hosts) {
@@ -62,7 +91,7 @@ function renderHosts(hosts) {
 
 //Guests//
 
-formGuest.addEventListener("submit", e => {
+guestForm.addEventListener("submit", e => {
   e.preventDefault();
   createGuestBackEnd(e);
 });
@@ -89,7 +118,7 @@ function renderPic(pic) {
           </div>
       </figcaption>`;
 
-  portafolio.append(figure);
+  pictures.append(figure);
 
   const like_button = figure.querySelector("#like_button");
   like_button.addEventListener("click", e => {
@@ -110,6 +139,7 @@ function init() {
   getPics().then(pics => renderPics(pics));
   getHosts().then(hosts => renderHosts(hosts));
   getWeedingInformation().then(weddingInformation => renderWeddingInformation(weddingInformation))
+  getEvents().then(events => renderEvents(events))
 }
 
 init();

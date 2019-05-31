@@ -97,16 +97,11 @@ guestForm.addEventListener("submit", e => {
   const formAnswer = document.querySelector("#formAnswer");
   const formMessage = document.querySelector("#formMessage");
 
-  newGuestName = formFullName.value;
-  newGuestEmail = formEmail.value;
-  newGuestMessage = formMessage.value;
-  newGuestAnswer = formAnswer.value;
-
   const newGuest = {
-    guest_full_name: newGuestName,
-    guest_attending: newGuestAnswer,
-    guest_message: newGuestMessage,
-    guest_email: newGuestEmail
+    guest_full_name: formFullName.value,
+    guest_attending: formEmail.value,
+    guest_message: formMessage.value,
+    guest_email: formAnswer.value
   }
 
   e.preventDefault();

@@ -1,17 +1,52 @@
 const PICTURES_URL = "http://localhost:3000/pictures";
-const GUSTS_URL = "http://localhost:3000/guests";
+const GUESTS_URL = "http://localhost:3000/guests";
+const HOSTS_URL = "http://localhost:3000/hosts";
+const EVENTS_URL = "http://localhost:3000/events";
+const WEDDING_URL = "http://localhost:3000/weddings/1";
+
 const portafolio = document.querySelector("#portfolio_wrapper");
 const formGuest = document.querySelector("#formGuest");
+const personOneName = document.querySelector("#person_one_name");
+const personOneHobbies = document.querySelector("#person_one_hobbies");
+const personOneImage = document.querySelector("#person_one_image");
+const personOneDetails = document.querySelector("#person_one_details");
+const personTwoName = document.querySelector("#person_two_name");
+const personTwoImage = document.querySelector("#person_two_image");
+const personTwoDetails = document.querySelector("#person_two_details");
+const personHobbies = document.querySelectorAll(".person_hobbies");
 
-function updatePicBackEnd(pic) {
-  return fetch(PICTURES_URL + `/${pic.id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(pic)
-  }).then(resp => resp.json());
+//Hosts//
+function renderHobbie(hobbie, personHobbies) {
+  const hobbie_li = document.createElement("li");
+  hobbie_li.className = "points";
+  hobbie_li.innerText = hobbie;
+  personHobbies.appendChild(hobbie_li);
 }
+
+function renderHosts(hosts) {
+  personOneName.innerText = hosts[0].host_name;
+  personOneImage.src = hosts[0].host_img_url;
+  personOneDetails.innerHTML = hosts[0].host_details;
+  hosts[0].host_hobbies
+    .split(". ")
+    .forEach(hobbie => renderHobbie(hobbie, personHobbies[0]));
+
+  personTwoName.innerText = hosts[1].host_name;
+  personTwoImage.src = hosts[1].host_img_url;
+  personTwoDetails.innerHTML = hosts[1].host_details;
+  hosts[1].host_hobbies
+    .split(". ")
+    .forEach(hobbie => renderHobbie(hobbie, personHobbies[1]));
+}
+
+//Guests//
+
+formGuest.addEventListener("submit", e => {
+  e.preventDefault();
+  createGuestBackEnd(e);
+});
+
+//Pics//
 
 function renderPic(pic) {
   const figure = document.createElement("figure");
@@ -33,31 +68,6 @@ function renderPic(pic) {
           </div>
       </figcaption>`;
 
-  // if (figure.id == "pic_1")
-  //   figure.styleName =
-  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
-  // else if (figure.id == "pic_2")
-  //   figure.styleName =
-  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
-  // else if (figure.id == "pic_3")
-  //   figure.styleName =
-  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
-  // else if (figure.id == "pic_4")
-  //   figure.styleName =
-  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
-  // else if (figure.id == "pic_5")
-  //   figure.styleName =
-  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
-  // else if (figure.id == "pic_6")
-  //   figure.styleName =
-  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
-  // else if (figure.id == "pic_7")
-  //   figure.styleName =
-  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
-  // else if (figure.id == "pic_8")
-  //   figure.styleName =
-  //     "position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;";
-
   portafolio.append(figure);
 
   const like_button = figure.querySelector("#like_button");
@@ -75,46 +85,9 @@ function renderPics(pics) {
   pics.forEach(pic => renderPic(pic));
 }
 
-function getPics() {
-  return fetch(PICTURES_URL).then(resp => resp.json());
-}
-
-formGuest.addEventListener("submit", e => {
-  e.preventDefault();
-  createGuestBackEnd(e);
-});
-
-function createGuestBackEnd(e) {
-  const formFullName = document.querySelector("#formFullName");
-  const formEmail = document.querySelector("#formEmail");
-  const formAnswer = document.querySelector("#formAnswer");
-  const formMessage = document.querySelector("#formMessage");
-
-  newGuestName = formFullName.value;
-  newGuestEmail = formEmail.value;
-  newGuestMessage = formMessage.value;
-  newGuestAnswer = formAnswer.value;
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      guest_full_name: newGuestName,
-      guest_attending: newGuestAnswer,
-      guest_message: newGuestMessage,
-      guest_email: newGuestEmail
-    })
-  };
-
-  return fetch(GUSTS_URL, options)
-    .then(resp => resp.json())
-    .then(e.target.reset());
-}
-
 function init() {
   getPics().then(pics => renderPics(pics));
+  getHosts().then(hosts => renderHosts(hosts));
 }
 
 init();

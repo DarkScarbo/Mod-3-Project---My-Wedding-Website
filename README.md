@@ -34,4 +34,4 @@ The client-side of the application is built with vanilla JavaScript. The style i
 ## Gif
 
 Functionality:
-![Functionality](https://github.com/DarkScarbo/Mod-4-Project---Weather-App/blob/master/frontend/public/Weather-App.gif)
+![Functionality](https://github.com/DarkScarbo/Mod-3-Project---My-Wedding-Website/blob/master/Wedding_client/img/Wedding.gif)

@@ -1,4 +1,4 @@
-## Weadding Website
+## Wedding Website
 This is a wedding Webpage in which you can know all the plans for the different events that it includes. As a guest, you can confirm you assitence to the wedding and leave a message.
 
 ## Motivation

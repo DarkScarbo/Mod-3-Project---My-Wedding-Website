@@ -11,7 +11,7 @@ This is the third proyect for the Flatiron School Software Engineering bootcamp.
 ## Server
 The backend it's built in Ruby on Rails with a PostgreSQL database, using an object-oriented programming approach. The app has 5 models: Wedding, Guest, Host, Event and Picture.
 
-- A Weadding has many Events, Hosts and Guests .
+- A Wedding has many Events, Hosts and Guests .
 - A Event belongs to a Wedding.
 - A Guest belongs to a Wedding.
 - A Guest has many hosts through Weddings.

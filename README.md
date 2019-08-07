@@ -1,5 +1,5 @@
 ## Weadding Website
-This is my wedding Webpage in which you canknow all the plans for the different events that it includes. As a guest, you can confirm you assitence to the wedding and leave a message.
+This is my wedding Webpage in which you can know all the plans for the different events that it includes. As a guest, you can confirm you assitence to the wedding and leave a message.
 
 ## Motivation
 This is the third proyect for the Flatiron School Software Engineering bootcamp. The basic requirements for this project are:
